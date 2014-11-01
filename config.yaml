@@ -1,0 +1,26 @@
+base: &base
+  LOGPATH: "worker.log"
+  AWS_accessKeyId: "AKIAJ7BRP7OA6A5BE74Q"
+  AWS_secretAccessKey: "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"
+  RABBIT_QUEUES:
+    PUBLISH: "node.info"
+    CONSUME: "node.build"
+  SCHEDULER:
+    apscheduler.misfire_grace_time: "10"
+    apscheduler.daemonic: False
+    apscheduler.coalesce: True
+    apscheduler.threadpool.max_threads: "50"
+
+
+development: &development
+  <<: *base
+  RABBIT_TX_URL: "amqp://guest:guest@localhost:5672/%2F"
+  RABBIT_RX_URL: "amqp://guest:guest@localhost:5672/%2F"
+
+
+production: &production
+  <<: *base
+  # optimized for producing
+  RABBIT_TX_URL: "amqp://nKaZmrga:dqb-3mmeXDV784a0jqF1Cd5rRmiZJeh4@digging-silver-5.bigwig.lshift.net:10244/qw6cwxKb7CDW"
+  # optimized for consuming
+  RABBIT_RX_URL: "amqp://nKaZmrga:dqb-3mmeXDV784a0jqF1Cd5rRmiZJeh4@digging-silver-5.bigwig.lshift.net:10245/qw6cwxKb7CDW"

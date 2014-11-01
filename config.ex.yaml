@@ -1,0 +1,20 @@
+base: &base
+  LOGPATH: ""
+  AWS_accessKeyId: ""
+  AWS_secretAccessKey: ""
+  RABBIT_QUEUES:
+  SCHEDULER:
+
+
+development: &development
+  <<: *base
+  RABBIT_TX_URL: ""
+  RABBIT_RX_URL: ""
+
+
+production: &production
+  <<: *base
+  # optimized for producing
+  RABBIT_TX_URL: ""
+  # optimized for consuming
+  RABBIT_RX_URL: ""
